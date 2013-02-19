@@ -2,11 +2,10 @@
 /*
 Plugin Name: NIX Gravatar Cache
 Author: NIX
-Version: 0.0.4
+Version: 0.0.5
 Description: Cache Gravatar in your Host and speed up your site
 Author URI: http://www.nixsolutions.com/departments/cms/
 */
-
 
 class NFGC_Gravatar_Cache {
 
@@ -127,14 +126,6 @@ class NFGC_Gravatar_Cache {
         if ( !is_writable( $this->upload_path.'/gravatar/' ) || is_admin() ) {
             return $source;
         }
-
-        // add_action( 'admin_notices', 'custom_error_notice' );
-        // function custom_error_notice(){
-        //      global $current_screen;
-        //      if ( $current_screen->parent_base == 'themes' )
-        //           echo '<div class="error"><p>Warning - If you modify template files this could cause problems with your website.</p></div>';
-        // }
-
         $time = $this->cache_to_second();
 
         preg_match('/d=([^&]*)/', $source, $d_tmp);
