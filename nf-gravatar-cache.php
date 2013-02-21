@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: NIX Gravatar Cache
-Author: NIX
+Author: NIX Solutions Ltd
 Version: 0.0.5
 Description: Cache Gravatar in your Host and speed up your site
 Author URI: http://www.nixsolutions.com/departments/cms/
