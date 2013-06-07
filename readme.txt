@@ -23,3 +23,10 @@ Caches Gravatars to your host and speed up your site.
 1. Upload `nix-gravatar-cache` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Enjoy
+
+
+== Changelog ==
+
+= 0.0.6 =
+
+Some bugs were fixed

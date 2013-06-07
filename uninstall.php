@@ -16,6 +16,8 @@ if ( is_dir( $dir ) ) {
                 }
             }
         }
+        delete_option('nf_c_a_options');
+        delete_option('nf_avatars_cache');
         closedir( $opendir );
         rmdir( $dir );
     }

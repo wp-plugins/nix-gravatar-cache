@@ -2,9 +2,9 @@
 /*
 Plugin Name: NIX Gravatar Cache
 Author: NIX Solutions Ltd
-Version: 0.0.5
+Version: 0.0.6
 Description: Cache Gravatar in your Host and speed up your site
-Author URI: http://www.nixsolutions.com/departments/cms/
+Author URI: http://nixsolutions.com/departments/cms/
 */
 
 class NFGC_Gravatar_Cache {
@@ -26,7 +26,6 @@ class NFGC_Gravatar_Cache {
             $this->upload_url  = $up_dir['baseurl'];
             $this->upload_path = $up_dir['basedir'];
         }
-
 
         $this->plugin_dir_path = plugin_dir_path( __FILE__ );
 
@@ -76,6 +75,13 @@ class NFGC_Gravatar_Cache {
                                     );
             update_option( 'nf_c_a_options', array( $default_options ) );
         }
+
+    }
+
+    // Deactivate plugin and clear cache
+    public function deactivate() {
+
+        $this->clear_cache();
 
     }
 
@@ -250,6 +256,7 @@ class NFGC_Gravatar_Cache {
                 if ( $no_permision_to_delete ) {
                     NFGC_Messages::add_message( 'error','Unable to clear the cache' );
                 }else{
+                    update_option('nf_avatars_cache', array() );
                     NFGC_Messages::add_message( 'info','The cache is cleared!' );
                     NFGC_Messages::add_message( 'info','Removed '.$count.' files' );
                 }

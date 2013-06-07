@@ -1,9 +1,9 @@
 <?php $cache_info = $this->get_cache_info(); ?>
-<div class="wrap">
+<div class="wrap gravatar-cache">
     <div id="icon-options-general" class="icon32"><br></div>
     <h2><?php _e( $this->plugin_name ); ?></h2>
 
-    <form method="post" class="gravatar_cache_form">
+    <form method="post" class="gravatar-cache-form">
         <table class="form-table">
             <tr valign="top">
                 <th scope="row"><?php _e( 'Activate Cache Gravatar:' );?></th>
@@ -32,4 +32,7 @@
             </button>
         </p>
     </form>
+
+    <?php include( $this->get_template_path() .'/about-us.php' ); ?>
+
 </div><!-- .wrap -->
