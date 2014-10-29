@@ -1,5 +1,5 @@
 === NIX Gravatar Cache ===
-Contributors: NIX Solutions Ltd
+Contributors: nixsolutions
 Tags: cache, caching, gravatar, avatar, performance, speedup, speed, comments, comment, network, wpmu, blog
 Requires at least: 3.0.1
 Tested up to: 3.5.1
