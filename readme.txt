@@ -30,3 +30,7 @@ Caches Gravatars to your host and speed up your site.
 = 0.0.6 =
 
 Some bugs were fixed
+
+= 0.0.6.1 =
+
+Fix SSL environment compatibility.
