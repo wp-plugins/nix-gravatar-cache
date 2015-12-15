@@ -203,6 +203,8 @@ class NFGC_Gravatar_Cache {
             update_option( 'nf_avatars_cache', $nf_avatars_cache );
         }
 
+        $g_url = str_replace("http://", "//", $g_url);
+
         return '<img alt="" src=\''.$g_url.'\' class="avatar avatar-'.$size.'" width="'.$size.'" height="'.$size.'" />';
     }
 
