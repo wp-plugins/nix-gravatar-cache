@@ -222,6 +222,8 @@ class NFGC_Gravatar_Cache {
 					}
 				}
 
+				$g_url = apply_filters( 'as3cf_get_asset', $g_url );
+
         return '<img alt="" src=\''.$g_url.'\' class="'.$classes.'" width="'.$size.'" height="'.$size.'" />';
     }
 
