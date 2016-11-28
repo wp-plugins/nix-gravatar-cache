@@ -16,6 +16,9 @@ class NFGC_Gravatar_Cache {
     public $plugin_name = 'NIX Gravatar Cache';
 
     function __construct(){
+
+				global $wp_version;
+
         if ( get_option( 'upload_url_path' ) ) {
             $this->upload_url  = get_option( 'upload_url_path' );
             $this->upload_path = get_option( 'upload_path' );
@@ -34,7 +37,9 @@ class NFGC_Gravatar_Cache {
 
         $active = get_option( 'nf_c_a_options' );
         if ( $active[0]['active'] == 1 ) {
-            add_filter( 'get_avatar', array( $this,'get_cached_avatar' ), -1000000000, 5 );
+
+					$num_args = version_compare( $wp_version, '4.2.0', '<' ) ? 5 : 6;
+          add_filter( 'get_avatar', array( $this, 'get_cached_avatar' ), -1000000000, $num_args );
         }
 
         add_action( 'admin_menu', array( $this,'add_admin_menu' ) );
@@ -127,7 +132,7 @@ class NFGC_Gravatar_Cache {
 
 
     // The main functional
-    public function get_cached_avatar( $source, $id_or_email, $size, $default, $alt ) {
+    public function get_cached_avatar( $source, $id_or_email, $size, $default, $alt, $args = array() ) {
 
         if ( !is_writable( $this->upload_path.'/gravatar/' ) || is_admin() ) {
             return $source;
@@ -203,7 +208,21 @@ class NFGC_Gravatar_Cache {
             update_option( 'nf_avatars_cache', $nf_avatars_cache );
         }
 
-        return '<img alt="" src=\''.$g_url.'\' class="avatar avatar-'.$size.'" width="'.$size.'" height="'.$size.'" />';
+				$classes = 'avatar avatar-' . $size;
+
+				if( array_key_exists( 'class', $args ) ){
+
+					if( is_array( $args['class'] ) ){
+
+						$classes .= ' ' . implode( ' ', $args['class'] );
+					}
+					else {
+
+						$classes .= ' ' . $args['class'];
+					}
+				}
+
+        return '<img alt="" src=\''.$g_url.'\' class="'.$classes.'" width="'.$size.'" height="'.$size.'" />';
     }
 
     // Create plugin option settings menu
