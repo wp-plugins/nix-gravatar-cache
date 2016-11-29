@@ -39,7 +39,8 @@ class NFGC_Gravatar_Cache {
         if ( $active[0]['active'] == 1 ) {
 
 					$num_args = version_compare( $wp_version, '4.2.0', '<' ) ? 5 : 6;
-          add_filter( 'get_avatar', array( $this, 'get_cached_avatar' ), -1000000000, $num_args );
+					add_filter( 'get_avatar', array( $this, 'get_cached_avatar' ), -1000000000, $num_args );
+					add_filter( 'as3cf_assets_locations_to_scan', array( $this, 'add_gravatar_directory_to_wp_offload_s3' ) );
         }
 
         add_action( 'admin_menu', array( $this,'add_admin_menu' ) );
@@ -226,6 +227,25 @@ class NFGC_Gravatar_Cache {
 
         return '<img alt="" src=\''.$g_url.'\' class="'.$classes.'" width="'.$size.'" height="'.$size.'" />';
     }
+
+		// Add Gravatar directory to WP Offload S3 Asset's array, so that S3/Cloudfront versions of the Gravatars can be served
+		public function add_gravatar_directory_to_wp_offload_s3( $locations ){
+
+			$locations[] = array(
+				'path'    => $this->upload_path.'/gravatar',
+				'url'     => $this->upload_url.'/gravatar',
+				'type' => 'content',
+				'object' => 'gravatar',
+				'exclude' => array(
+					'node_modules',
+					'.git',
+					'.sass-cache',
+					'.svn',
+				),
+			);
+
+			return $locations;
+		}
 
     // Create plugin option settings menu
     public function add_admin_menu() {
