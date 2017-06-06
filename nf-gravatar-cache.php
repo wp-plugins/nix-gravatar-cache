@@ -105,7 +105,7 @@ class NFGC_Gravatar_Cache {
 
             switch ( $key ) {
                 case 'ttl_min':
-                    $cache_second = $value != 0 ? $value*60 : '';
+                    $cache_second = $value != 0 ? $value*60 : 0;
                     break;
                 case 'ttl_hour':
                     $cache_second = $value != 0 ? ( $value*60*60 ) + $cache_second : $cache_second;
